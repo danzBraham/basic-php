@@ -25,6 +25,8 @@ $anime = query('SELECT * FROM anime');
    
    <h1>Anime List</h1>
 
+   <h4><a href="insert.php">Add Anime</a></h4>
+
    <table border="1" cellpadding="10" cellspacing="0">
       <tr>
          <th>No</th>
