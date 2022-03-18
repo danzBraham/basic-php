@@ -28,8 +28,8 @@ $anime = query("SELECT * FROM anime WHERE id = $id");
       <p>Source : <?= $anime['Source']; ?></p>
       <p>Premiered : <?= $anime['Premiered']; ?></p>
       <p>MC : <?= $anime['MC']; ?></p>
-      <p><a href="">Edit</a> | <a href="">Delete</a></p>
-      <p><a href="latihan3.php">Back to Anime List</a></p>
+      <p><a href="edit.php?id=<?= $anime['id']; ?>">Edit</a> | <a href="delete.php?id=<?= $anime['id'];?>" onclick="return confirm('Are u sure want to delete it?')">Delete</a></p>
+      <p><a href="index.php">Back to Anime List</a></p>
 
 </body>
 </html>

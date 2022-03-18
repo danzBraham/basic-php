@@ -27,15 +27,43 @@ function insert($data) {
    $studio = htmlspecialchars($data["Studio"]);
    $source = htmlspecialchars($data["Source"]);
    $premiered = htmlspecialchars($data["Premiered"]);
-   $poster = htmlspecialchars($data["Poster"]);
    $MC = htmlspecialchars($data["MC"]);
+   $poster = htmlspecialchars($data["Poster"]);
 
    $query = "INSERT INTO anime VALUES (
       NULL, '$title', '$studio', '$source', '$premiered', '$MC', '$poster'
    )";
 
-   mysqli_query($conn,$query);
-   echo mysqli_error($conn);
+   mysqli_query($conn,$query) or die(mysqli_error($conn));
+   return mysqli_affected_rows($conn);
+}
+
+function delete($id) {
+   $conn = connection();
+   mysqli_query($conn, "DELETE FROM anime WHERE id = $id") or die(mysqli_error($conn));
+   return mysqli_affected_rows($conn);
+}
+
+function edit($data) {
+   $conn = connection();
+
+   $id = htmlspecialchars($data["id"]);
+   $title = htmlspecialchars($data["Title"]);
+   $studio = htmlspecialchars($data["Studio"]);
+   $source = htmlspecialchars($data["Source"]);
+   $premiered = htmlspecialchars($data["Premiered"]);
+   $MC = htmlspecialchars($data["MC"]);
+   $poster = htmlspecialchars($data["Poster"]);
+
+   $query = "UPDATE anime SET
+            Title = '$title',
+            Studio = '$studio',
+            Source = '$source',
+            Premiered = '$premiered',
+            MC = '$MC',
+            Poster = '$poster' WHERE id = $id";
+
+   mysqli_query($conn,$query) or die(mysqli_error($conn));
    return mysqli_affected_rows($conn);
 }
 
