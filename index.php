@@ -1,6 +1,10 @@
 <?php 
 require 'functions.php';
 $anime = query('SELECT * FROM anime');
+
+if (isset($_POST['search'])) {
+   $anime = search($_POST['keywords']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +20,10 @@ $anime = query('SELECT * FROM anime');
          text-align: center;
       }
 
+      form {
+         margin-bottom: 20px;
+      }
+
       table {
          width: 100%;
       }
@@ -27,6 +35,12 @@ $anime = query('SELECT * FROM anime');
 
    <h4><a href="insert.php">Add Anime</a></h4>
 
+   <form action="" method="POST">
+      <input type="text" name="keywords" placeholder="Enter keywords..." autocomplete="off" size="40" autofocus>
+      <button type="submit" name="search">Search</button>
+   </form>
+   
+
    <table border="1" cellpadding="10" cellspacing="0">
       <tr>
          <th>No</th>
@@ -34,6 +48,12 @@ $anime = query('SELECT * FROM anime');
          <th>Title</th>
          <th>Action</th>
       </tr>
+      
+      <?php if (empty($anime)) : ?>
+         <tr>
+            <th colspan="4" style="color: red;">Anime is not Founded</th>
+         </tr>
+      <?php endif; ?>
 
       <?php $i = 1; ?>
       <?php foreach($anime as $nimek) : ?>

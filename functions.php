@@ -67,4 +67,24 @@ function edit($data) {
    return mysqli_affected_rows($conn);
 }
 
+function search($keywords) {
+   $conn = connection();
+
+   $query = "SELECT * FROM anime WHERE
+            Title LIKE '%$keywords%' OR
+            Studio LIKE '%$keywords%' OR
+            Source LIKE '%$keywords%' OR
+            Premiered LIKE '%$keywords%' OR
+            MC LIKE '%$keywords%'";
+   
+   $result = mysqli_query($conn, $query);
+
+   $rows = [];
+   while ($row = mysqli_fetch_assoc($result)) {
+      $rows[] = $row;
+   }
+
+   return $rows;
+}
+
 ?>
