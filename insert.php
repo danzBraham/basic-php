@@ -1,8 +1,8 @@
 <?php 
 require "functions.php";
 
+// cek apakah tombol add sudah ditekan
 if (isset($_POST["add"])) {
-
    if (insert($_POST) > 0) {
       echo "<script>
             alert('Data Succesfully Added!');
@@ -13,7 +13,6 @@ if (isset($_POST["add"])) {
             alert('Data Failed to Add!');
             </script>";
    }
-
 }
 ?>
 

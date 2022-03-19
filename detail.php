@@ -1,7 +1,10 @@
 <?php 
 require 'functions.php';
 
+// ambil id dari url
 $id = $_GET['id'];
+
+// query anime berdasarkan id
 $anime = query("SELECT * FROM anime WHERE id = $id");
 ?>
 

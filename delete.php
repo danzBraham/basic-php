@@ -1,6 +1,7 @@
 <?php 
 require "functions.php";
 
+// ambil id dari url
 $id = $_GET['id'];
 
 if (delete($_GET['id']) > 0) {
@@ -13,5 +14,4 @@ if (delete($_GET['id']) > 0) {
             alert('Data Failed to Delete!');
          </script>";
 }
-
 ?>

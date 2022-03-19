@@ -1,12 +1,20 @@
 <?php 
 require "functions.php";
 
+// jika tidak ada id di url
+if (!isset($_GET['id'])) {
+   header("Location: index.php");
+   exit;
+}
+
+// ambil id dari url
 $id = $_GET['id'];
 
+// query anime berdasarkan id
 $anime = query("SELECT * FROM anime WHERE id = $id");
 
+// cek apakah tombol edit sudah ditekan
 if (isset($_POST["edit"])) {
-
    if (edit($_POST) > 0) {
       echo "<script>
             alert('Data Succesfully Edited!');
@@ -17,7 +25,6 @@ if (isset($_POST["edit"])) {
             alert('Data Failed to Edit!');
             </script>";
    }
-
 }
 ?>
 
