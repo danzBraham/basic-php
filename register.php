@@ -47,7 +47,7 @@ if (isset($_POST['register'])) {
          <tr>
             <td><button type="submit" name="register">Register</button></td>
             <td></td>
-            <td></td>
+            <td><a href="login.php">Sign in if you already have an account</a></td>
          </tr>
       </table>
    </form>
