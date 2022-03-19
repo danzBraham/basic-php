@@ -93,11 +93,6 @@ function login($data) {
    $username = htmlspecialchars($data['username']);
    $password = htmlspecialchars($data['password']);
 
-   $query = "SELECT * FROM users WHERE username = '$username'";
-
-   $result = mysqli_query($conn, $query);
-   var_dump($result);
-
    // cek username
    if ($user = query("SELECT * FROM users WHERE username = '$username'")) {
       // cek password
@@ -167,7 +162,7 @@ function register($data) {
    $query = "INSERT INTO users VALUES (
       NULL, '$username', '$newPassword'
    )";
-   
+
    mysqli_query($conn, $query) or die(mysqli_error($conn));
    return mysqli_affected_rows($conn);
 }
