@@ -1,5 +1,12 @@
 <?php 
+session_start();
 require 'functions.php';
+
+if (!isset($_SESSION['login'])) {
+   header("Location: login.php");
+   exit;
+}
+
 $anime = query('SELECT * FROM anime');
 
 if (isset($_POST['search'])) {
@@ -30,6 +37,8 @@ if (isset($_POST['search'])) {
    </style>
 </head>
 <body>
+
+   <a href="logout.php">Logout</a>
    
    <h1>Anime List</h1>
 
@@ -40,7 +49,6 @@ if (isset($_POST['search'])) {
       <button type="submit" name="search">Search</button>
    </form>
    
-
    <table border="1" cellpadding="10" cellspacing="0">
       <tr>
          <th>No</th>
@@ -51,7 +59,7 @@ if (isset($_POST['search'])) {
       
       <?php if (empty($anime)) : ?>
          <tr>
-            <th colspan="4" style="color: red;">Anime is not Founded</th>
+            <th colspan="4" style="color: red;">Anime not Found</th>
          </tr>
       <?php endif; ?>
 

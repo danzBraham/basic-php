@@ -1,5 +1,11 @@
 <?php 
+session_start();
 require "functions.php";
+
+if (!isset($_SESSION['login'])) {
+   header("Location: login.php");
+   exit;
+}
 
 // cek apakah tombol add sudah ditekan
 if (isset($_POST["add"])) {
