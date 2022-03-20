@@ -10,7 +10,7 @@ if (!isset($_SESSION['login'])) {
 $anime = query('SELECT * FROM anime');
 
 if (isset($_POST['search'])) {
-   $anime = search($_POST['keywords']);
+   $anime = search($_POST['keyword']);
 }
 ?>
 
@@ -45,36 +45,39 @@ if (isset($_POST['search'])) {
    <h4><a href="insert.php">Add Anime</a></h4>
 
    <form action="" method="POST">
-      <input type="text" name="keywords" placeholder="Enter keywords..." autocomplete="off" size="40" autofocus>
-      <button type="submit" name="search">Search</button>
+      <input type="text" name="keyword" placeholder="Enter keywords..." autocomplete="off" size="40" autofocus class="keyword">
+      <button type="submit" name="search" class="search-button">Search</button>
    </form>
    
-   <table border="1" cellpadding="10" cellspacing="0">
-      <tr>
-         <th>No</th>
-         <th>Poster</th>
-         <th>Title</th>
-         <th>Action</th>
-      </tr>
-      
-      <?php if (empty($anime)) : ?>
+   <div class="container">
+      <table border="1" cellpadding="10" cellspacing="0">
          <tr>
-            <th colspan="4" style="color: red;">Anime not Found</th>
+            <th>No</th>
+            <th>Poster</th>
+            <th>Title</th>
+            <th>Action</th>
          </tr>
-      <?php endif; ?>
+         
+         <?php if (empty($anime)) : ?>
+            <tr>
+               <th colspan="4" style="color: red;">Anime not Found</th>
+            </tr>
+         <?php endif; ?>
 
-      <?php $i = 1; ?>
-      <?php foreach($anime as $nimek) : ?>
-      <tr>
-         <td><?= $i++; ?></td>
-         <td><img src="img/<?= $nimek['Poster']; ?>" alt="Poster"></td>
-         <td><?= $nimek['Title']; ?></td>
-         <td>
-            <a href="detail.php?id=<?= $nimek['id']; ?>">See details</a>
-         </td>
-      </tr>
-      <?php endforeach; ?>
-   </table>
+         <?php $i = 1; ?>
+         <?php foreach($anime as $nimek) : ?>
+         <tr>
+            <td><?= $i++; ?></td>
+            <td><img src="img/<?= $nimek['Poster']; ?>" alt="Poster"></td>
+            <td><?= $nimek['Title']; ?></td>
+            <td>
+               <a href="detail.php?id=<?= $nimek['id']; ?>">See details</a>
+            </td>
+         </tr>
+         <?php endforeach; ?>
+      </table>
+   </div>
 
+   <script src="js/script.js"></script>
 </body>
 </html>

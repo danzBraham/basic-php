@@ -67,15 +67,15 @@ function edit($data) {
    return mysqli_affected_rows($conn);
 }
 
-function search($keywords) {
+function search($keyword) {
    $conn = connection();
 
    $query = "SELECT * FROM anime WHERE
-            Title LIKE '%$keywords%' OR
-            Studio LIKE '%$keywords%' OR
-            Source LIKE '%$keywords%' OR
-            Premiered LIKE '%$keywords%' OR
-            MC LIKE '%$keywords%'";
+            Title LIKE '%$keyword%' OR
+            Studio LIKE '%$keyword%' OR
+            Source LIKE '%$keyword%' OR
+            Premiered LIKE '%$keyword%' OR
+            MC LIKE '%$keyword%'";
    
    $result = mysqli_query($conn, $query);
 
