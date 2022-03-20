@@ -88,8 +88,6 @@ function search($keywords) {
 }
 
 function login($data) {
-   $conn = connection();
-
    $username = htmlspecialchars($data['username']);
    $password = htmlspecialchars($data['password']);
 
