@@ -38,7 +38,7 @@ $anime = query("SELECT * FROM anime WHERE id = $id");
    
       <h1><?= $anime['Title']; ?></h1>
 
-      <p><img src="img/<?= $anime['Poster']; ?>" alt=""></p>
+      <p><img src="img/<?= $anime['Poster']; ?>" alt="Poster" width="225"></p>
       <p>Studio : <?= $anime['Studio']; ?></p>
       <p>Source : <?= $anime['Source']; ?></p>
       <p>Premiered : <?= $anime['Premiered']; ?></p>

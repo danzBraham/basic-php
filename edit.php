@@ -46,7 +46,7 @@ if (isset($_POST["edit"])) {
    
    <h1>Edit Anime Data</h1>
 
-   <form action="" method="POST">
+   <form action="" method="POST" enctype="multipart/form-data">
       <table>
          <input type="hidden" name="id" value="<?= $anime['id']; ?>">
          <tr>
@@ -77,7 +77,9 @@ if (isset($_POST["edit"])) {
          <tr>
             <td><label for="poster">Poster</label></td>
             <td>:</td>
-            <td><input type="text" name="Poster" id="poster" required value="<?= $anime['Poster']; ?>"></td>
+            <td><img src="img/<?= $anime['Poster']; ?>" class="img-preview" style="width: 125px; display: block;"></td>
+            <td><input type="file" name="Poster" id="poster" class="img-input" onchange="previewImage()"></td>
+            <input type="hidden" name="oldPoster" value="<?= $anime['Poster']; ?>">
          </tr>
          <tr>
             <td><button type="submit" name="edit">Edit Data</button></td>
@@ -87,5 +89,6 @@ if (isset($_POST["edit"])) {
       </table>
    </form>
 
+   <script src="js/script.js"></script>
 </body>
 </html>

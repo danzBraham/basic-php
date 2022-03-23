@@ -34,7 +34,7 @@ if (isset($_POST["add"])) {
    
    <h1>Add Anime Data</h1>
 
-   <form action="" method="POST">
+   <form action="" method="POST" enctype="multipart/form-data">
       <table>
          <tr>
             <td><label for="title">Title</label></td>
@@ -64,7 +64,8 @@ if (isset($_POST["add"])) {
          <tr>
             <td><label for="poster">Poster</label></td>
             <td>:</td>
-            <td><input type="text" name="Poster" id="poster" required></td>
+            <td><img src="img/batu.png" class="img-preview" style="width: 125px; display: block;"></td>
+            <td><input type="file" name="Poster" id="poster" class="img-input" onchange="previewImage()"></td>
          </tr>
          <tr>
             <td><button type="submit" name="add">Add Data</button></td>
@@ -74,5 +75,6 @@ if (isset($_POST["add"])) {
       </table>
    </form>
 
+   <script src="js/script.js"></script>
 </body>
 </html>

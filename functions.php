@@ -20,6 +20,54 @@ function query($query) {
    return $rows;
 }
 
+function upload() {
+   $file_name = $_FILES['Poster']['name'];
+   $file_type = $_FILES['Poster']['type'];
+   $file_tmp = $_FILES['Poster']['tmp_name'];
+   $file_error = $_FILES['Poster']['error'];
+   $file_size = $_FILES['Poster']['size'];
+
+   // ketika tidak ada gambar yang diupload
+   if ($file_error == 4) {
+      return 'batu.png';
+   }
+
+   // cek ekstensi file
+   $extension_valid = ['jpg', 'jpeg', 'png'];
+   $extension_file = explode('.', $file_name);
+   $extension_file = strtolower(end($extension_file));
+
+   if (!in_array($extension_file, $extension_valid)) {
+      echo "<script>
+               alert('You are not uploading an image');
+            </script>";
+      return false;
+   }
+
+   // cek tipe file
+   if ($file_type != 'image/jpeg' && $file_type != 'image/png') {
+      echo "<script>
+               alert('You are not uploading an image');
+            </script>";
+      return false;
+   }
+
+   // cek ukuran file
+   if ($file_size > 5000000) {
+      echo "<script>
+               alert('The image size is too large');
+            </script>";
+      return false;
+   }
+
+   // lolos pengecekan dan siap upload file
+   // generate nama file baru
+   $new_file_name = uniqid() . '.' . $extension_file;
+   move_uploaded_file($file_tmp, 'img/' . $new_file_name);
+   
+   return $new_file_name;
+}
+
 function insert($data) {
    $conn = connection();
 
@@ -28,7 +76,12 @@ function insert($data) {
    $source = htmlspecialchars($data["Source"]);
    $premiered = htmlspecialchars($data["Premiered"]);
    $MC = htmlspecialchars($data["MC"]);
-   $poster = htmlspecialchars($data["Poster"]);
+   // $poster = htmlspecialchars($data["Poster"]);
+
+   $poster = upload();
+   if (!$poster) {
+      return false;
+   }
 
    $query = "INSERT INTO anime VALUES (
       NULL, '$title', '$studio', '$source', '$premiered', '$MC', '$poster'
@@ -40,6 +93,13 @@ function insert($data) {
 
 function delete($id) {
    $conn = connection();
+
+   // menghapus gambar di folder img
+   $anime = query("SELECT * FROM anime WHERE id = $id");
+   if ($anime['Poster'] != 'batu.png') {
+      unlink('img/' . $anime['Poster']);
+   }
+
    mysqli_query($conn, "DELETE FROM anime WHERE id = $id") or die(mysqli_error($conn));
    return mysqli_affected_rows($conn);
 }
@@ -53,7 +113,16 @@ function edit($data) {
    $source = htmlspecialchars($data["Source"]);
    $premiered = htmlspecialchars($data["Premiered"]);
    $MC = htmlspecialchars($data["MC"]);
-   $poster = htmlspecialchars($data["Poster"]);
+   $oldPoster = htmlspecialchars($data["oldPoster"]);
+
+   $poster = upload();
+   if (!$poster) {
+      return false;
+   }
+
+   if ($poster == 'batu.png') {
+      $poster = $oldPoster;
+   }
 
    $query = "UPDATE anime SET
             Title = '$title',

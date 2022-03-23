@@ -25,3 +25,16 @@ keyword.addEventListener('keyup', function () {
       .then((response) => response.text())
       .then((response) => (container.innerHTML = response));
 });
+
+// Preview Image untuk INSERT dan EDIT
+function previewImage() {
+   const imgInput = document.querySelector('.img-input');
+   const imgPreview = document.querySelector('.img-preview');
+
+   const oFReader = new FileReader();
+   oFReader.readAsDataURL(imgInput.files[0]);
+
+   oFReader.onload = function (oFREvent) {
+      imgPreview.src = oFREvent.target.result;
+   };
+}
